@@ -5,6 +5,8 @@ import com.example.android.architecture.blueprints.todoapp.faq.domain.usecase.Fa
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
 import com.example.android.architecture.blueprints.todoapp.faq.view.FAQViewContract;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.List;
 
 import rx.Observable;
@@ -49,8 +51,11 @@ public class FAQPresenter implements BasePresenter {
                     }
 
                     @Override
-                    public void onNext(List<FAQModel> faqModels) {
-                        view.showFAQ(faqModels);
+                    public void onNext(@NotNull List<FAQModel> faqModels) {
+                        if (faqModels.isEmpty()) {
+                            view.showNoFAQ(faqModels);
+                        } else
+                            view.showFAQ(faqModels);
                     }
                 });
     }

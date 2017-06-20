@@ -18,4 +18,6 @@ public interface FAQViewContract extends BaseView<FAQPresenter> {
     void showLoadingFAQError();
 
     boolean isActive();
+
+    void showNoFAQ(List<FAQModel> faqModels);
 }

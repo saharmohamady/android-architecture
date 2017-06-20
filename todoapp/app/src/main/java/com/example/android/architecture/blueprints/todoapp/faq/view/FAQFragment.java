@@ -108,4 +108,12 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
         return isAdded();
     }
 
+    @Override
+    public void showNoFAQ(List<FAQModel> faqModels) {
+        faqDataAdapter.replaceData(faqModels);
+        faqListLayout.setVisibility(View.GONE);
+        noFaqView.setVisibility(View.VISIBLE);
+        setProgressIndicator(false);
+    }
+
 }
