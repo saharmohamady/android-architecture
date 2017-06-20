@@ -9,13 +9,14 @@ import java.util.List;
 import rx.Observable;
 
 /**
- * Created by Sa7r on 6/18/2017.
+ * Created by Sahar Almohamady on 6/18/2017.
  */
 
 public class FAQFakeRepository implements FAQDataSource {
-    public FAQFakeRepository(){
+    public FAQFakeRepository() {
 
     }
+
     @Override
     public Observable<List<FAQModel>> getListOfFAQs() {
         ArrayList<FAQModel> models = new ArrayList<>();

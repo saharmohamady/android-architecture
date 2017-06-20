@@ -9,7 +9,7 @@ import java.util.List;
 import rx.Observable;
 
 /**
- * Created by Sa7r on 6/18/2017.
+ * Created by Sahar Almohamady on 6/18/2017.
  */
 
 public class FAQRemoteRepository implements FAQDataSource {
@@ -19,13 +19,10 @@ public class FAQRemoteRepository implements FAQDataSource {
 
     @Override
     public Observable<List<FAQModel>> getListOfFAQs() {
-
         return getFaqs();
     }
 
     private Observable<List<FAQModel>> getFaqs() {
-
-        // RxJava
         return ApisUtils.getFaqsAPIInstance().listFAQs();
     }
 }

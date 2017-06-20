@@ -1,8 +1,8 @@
 package com.example.android.architecture.blueprints.todoapp.faq.view;
 
+import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import com.example.android.architecture.blueprints.todoapp.Injection;
 import com.example.android.architecture.blueprints.todoapp.R;
-import com.example.android.architecture.blueprints.todoapp.faq.presenter.FAQPresenter;
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
+import com.example.android.architecture.blueprints.todoapp.faq.presenter.FAQPresenter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,6 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         faqDataAdapter = new FAQDataAdapter(new ArrayList<FAQModel>(0), this);
-
     }
 
     @Nullable
@@ -50,8 +49,9 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
         faqPresenter = new FAQPresenter(this, Injection.provideGetFAQ(getActivity()));
 
         swipeRefreshLayout =
-                (SwipeRefreshLayout)view.findViewById(R.id.refresh_layout);
+                (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
+
         return view;
     }
 
@@ -66,7 +66,6 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
         if (getView() == null) {
             return;
         }
-        // Make sure setRefreshing() is called after the layout is done with everything else.
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -103,6 +102,7 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
     public void onRefresh() {
         faqPresenter.start();
     }
+
     @Override
     public boolean isActive() {
         return isAdded();

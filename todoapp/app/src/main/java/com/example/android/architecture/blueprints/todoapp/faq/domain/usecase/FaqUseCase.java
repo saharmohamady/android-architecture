@@ -9,13 +9,13 @@ import rx.Observable;
 
 
 /**
- * Created by Sa7r on 6/14/2017.
+ * Created by Sahar Almohamady on 6/14/2017.
  */
 
-public class GetFaqUseCase {
+public class FaqUseCase {
     private final FAQRepository faqRepository;
 
-    public GetFaqUseCase(FAQRepository faqRepository) {
+    public FaqUseCase(FAQRepository faqRepository) {
         this.faqRepository = faqRepository;
     }
 

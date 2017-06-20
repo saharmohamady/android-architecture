@@ -14,17 +14,17 @@ import java.util.List;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
- * Created by Sa7r on 6/14/2017.
+ * Created by Sahar Almohamady on 6/14/2017.
  */
 
-public class FAQDataAdapter  extends BaseAdapter {
+public class FAQDataAdapter extends BaseAdapter {
 
     private List<FAQModel> faqData;
     private FAQListItemListener mItemListener;
 
     public FAQDataAdapter(List<FAQModel> faqData, FAQListItemListener listner) {
         setList(faqData);
-        this.mItemListener=listner;
+        this.mItemListener = listner;
     }
 
     public void replaceData(List<FAQModel> tasks) {
@@ -65,6 +65,7 @@ public class FAQDataAdapter  extends BaseAdapter {
         titleTV.setText(faqItem.getTitle());
         TextView answerTV = (TextView) rowView.findViewById(R.id.tvAnswer);
         answerTV.setText(faqItem.getBody());
+
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

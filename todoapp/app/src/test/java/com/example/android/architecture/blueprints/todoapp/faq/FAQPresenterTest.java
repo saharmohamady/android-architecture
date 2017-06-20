@@ -3,19 +3,16 @@ package com.example.android.architecture.blueprints.todoapp.faq;
 import com.example.android.architecture.blueprints.todoapp.faq.datasourse.FAQRepository;
 import com.example.android.architecture.blueprints.todoapp.faq.datasourse.fake.FAQFakeRepository;
 import com.example.android.architecture.blueprints.todoapp.faq.datasourse.remote.FAQRemoteRepository;
-import com.example.android.architecture.blueprints.todoapp.faq.domain.usecase.GetFaqUseCase;
+import com.example.android.architecture.blueprints.todoapp.faq.domain.usecase.FaqUseCase;
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
 import com.example.android.architecture.blueprints.todoapp.faq.presenter.FAQPresenter;
 import com.example.android.architecture.blueprints.todoapp.faq.view.FAQViewContract;
-import com.example.android.architecture.blueprints.todoapp.tasks.TasksFilterType;
 import com.google.common.collect.Lists;
 
 import org.junit.Before;
-import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
-import org.mockito.InOrder;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -26,11 +23,10 @@ import java.util.List;
 import rx.Observer;
 
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.inOrder;
 import static org.mockito.Mockito.verify;
 
 /**
- * Created by Sa7r on 6/18/2017.
+ * Created by Sahar Almohamady on 6/18/2017.
  */
 @RunWith(MockitoJUnitRunner.class)
 public class FAQPresenterTest {
@@ -68,9 +64,9 @@ public class FAQPresenterTest {
     }
 
     private FAQPresenter givenTasksPresenter() {
-        GetFaqUseCase getFaqUseCase = new GetFaqUseCase(faqRepository);
+        FaqUseCase faqUseCase = new FaqUseCase(faqRepository);
 
-        return new FAQPresenter( viewContract,getFaqUseCase);
+        return new FAQPresenter( viewContract, faqUseCase);
     }
 //    @Test
 //    public void loadAllFAQSFromRepositoryAndLoadIntoView() {

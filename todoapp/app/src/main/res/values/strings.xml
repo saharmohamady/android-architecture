@@ -39,11 +39,6 @@
     <string name="no_data">No data</string>
     <string name="loading">LOADING</string>
 
-    <string-array name="list_tasks_array">
-        <item>@string/nav_all</item>
-        <item>@string/nav_active</item>
-        <item>@string/nav_completed</item>
-    </string-array>
     <string name="nav_all">All</string>
     <string name="nav_active">Active</string>
     <string name="nav_completed">Completed</string>

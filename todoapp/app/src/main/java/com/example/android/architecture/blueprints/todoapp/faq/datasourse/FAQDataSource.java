@@ -7,7 +7,7 @@ import java.util.List;
 import rx.Observable;
 
 /**
- * Created by Sa7r on 6/15/2017.
+ * Created by Sahar Almohamady on 6/15/2017.
  */
 
 public interface FAQDataSource {

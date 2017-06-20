@@ -4,7 +4,7 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Sa7r on 6/14/2017.
+ * Created by Sahar Almohamady on 6/14/2017.
  */
 
 public class FAQModel {
@@ -23,8 +23,8 @@ public class FAQModel {
     private String body;
 
     public FAQModel(String question1, String body) {
-        this.title=question1;
-        this.body=body;
+        this.title = question1;
+        this.body = body;
     }
 
     public Integer getUserId() {

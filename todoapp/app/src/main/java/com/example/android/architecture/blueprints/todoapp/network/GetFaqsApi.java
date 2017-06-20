@@ -9,7 +9,7 @@ import retrofit2.http.Path;
 import rx.Observable;
 
 /**
- * Created by Sa7r on 6/15/2017.
+ * Created by Sahar Almohamady on 6/15/2017.
  */
 
 public interface GetFaqsApi {
