@@ -29,6 +29,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
+        buildTypes.each {
+            it.buildConfigField 'String', 'BASE_URL', BASE_URL
+        }
     }
 
     // If you need to add more flavors, consider using flavor dimensions.
