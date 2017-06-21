@@ -8,6 +8,6 @@ import com.example.android.architecture.blueprints.todoapp.BuildConfig;
 
 public class ApisUtils {
     public static GetFaqsApi getFaqsAPIInstance() {
-        return RetrofitNetworkManager.getClient(BuildConfig.BASE_URL).create(GetFaqsApi.class);
+        return NetworkManager.getInstance(BuildConfig.BASE_URL).create(GetFaqsApi.class);
     }
 }

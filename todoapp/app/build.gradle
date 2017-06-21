@@ -30,7 +30,8 @@ android {
             testProguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguardTest-rules.pro'
         }
         buildTypes.each {
-            it.buildConfigField 'String', 'BASE_URL', BASE_URL
+            it.buildConfigField 'String', 'BASE_URL', "https://jsonplaceholder.typicode.com/"
+            it.buildConfigField 'int', 'TIMEOUT_DEFAULT_VALUE', '20'
         }
     }
 
