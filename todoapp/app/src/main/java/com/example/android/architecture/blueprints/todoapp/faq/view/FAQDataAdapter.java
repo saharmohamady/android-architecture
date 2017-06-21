@@ -76,6 +76,11 @@ public class FAQDataAdapter extends BaseAdapter {
         else
             selectionCB.setVisibility(View.GONE);
 
+        if (index == selectedItemIndex)
+            selectionCB.setChecked(true);
+        else
+            selectionCB.setChecked(false);
+
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -85,12 +90,10 @@ public class FAQDataAdapter extends BaseAdapter {
         selectionCB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-
                 if (isChecked)
                     selectedItemIndex = index;
                 else
                     selectedItemIndex = UNDEFINDE;
-                FAQDataAdapter.this.notifyDataSetChanged();
             }
         });
         rowView.setOnLongClickListener(new View.OnLongClickListener() {
