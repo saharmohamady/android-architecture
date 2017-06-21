@@ -2,7 +2,8 @@ package com.example.android.architecture.blueprints.todoapp.faq.datasourse.remot
 
 import com.example.android.architecture.blueprints.todoapp.faq.datasourse.FAQDataSource;
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
-import com.example.android.architecture.blueprints.todoapp.network.ApisUtils;
+import com.example.android.architecture.blueprints.todoapp.network.GetFaqsApi;
+import com.example.android.architecture.blueprints.todoapp.network.NetworkManager;
 
 import java.util.List;
 
@@ -23,6 +24,6 @@ public class FAQRemoteRepository implements FAQDataSource {
     }
 
     private Observable<List<FAQModel>> getFaqs() {
-        return ApisUtils.getFaqsAPIInstance().listFAQs();
+        return NetworkManager.getInstance().create(GetFaqsApi.class).listFAQs();
     }
 }
