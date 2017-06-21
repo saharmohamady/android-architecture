@@ -1,6 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp.faq.presenter;
 
 import com.example.android.architecture.blueprints.todoapp.BasePresenter;
+import com.example.android.architecture.blueprints.todoapp.faq.domain.usecase.DeleteFaqsUseCase;
 import com.example.android.architecture.blueprints.todoapp.faq.domain.usecase.FaqUseCase;
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
 import com.example.android.architecture.blueprints.todoapp.faq.view.FAQViewContract;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import rx.Observable;
 import rx.Observer;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 
@@ -21,10 +23,15 @@ import rx.schedulers.Schedulers;
 public class FAQPresenter implements BasePresenter {
     private final FAQViewContract view;
     private final FaqUseCase faqUseCase;
+    private final DeleteFaqsUseCase deleteUseCase;
+    private Subscription clearSubscribtion;
+    private Subscription loadSubscribtion;
+    private Subscription deleteSubscribtion;
 
-    public FAQPresenter(FAQViewContract view, FaqUseCase faqUseCase) {
+    public FAQPresenter(FAQViewContract view, FaqUseCase faqUseCase, DeleteFaqsUseCase deleteUseCase) {
         this.view = view;
         this.faqUseCase = faqUseCase;
+        this.deleteUseCase = deleteUseCase;
     }
 
     @Override
@@ -36,7 +43,7 @@ public class FAQPresenter implements BasePresenter {
         view.setProgressIndicator(true);
 
         Observable<List<FAQModel>> faqObservable = faqUseCase.executeUseCase();
-        faqObservable.subscribeOn(Schedulers.io())
+        loadSubscribtion = faqObservable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<List<FAQModel>>() {
                     @Override
@@ -58,5 +65,48 @@ public class FAQPresenter implements BasePresenter {
                             view.showFAQ(faqModels);
                     }
                 });
+    }
+
+    public void clearFAQs() {
+        Observable<Object> clearObservable = deleteUseCase.clearData();
+        clearSubscribtion = clearObservable.observeOn(AndroidSchedulers.mainThread()).
+                subscribeOn(Schedulers.io()).subscribe(new Observer<Object>() {
+            @Override
+            public void onCompleted() {
+                view.clearAllDataDone();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                view.showClearError();
+            }
+
+            @Override
+            public void onNext(Object o) {
+
+            }
+        });
+    }
+
+    public void deleteSelected(int selectedItemIndex) {
+
+        Observable<Integer> deleteObservable = deleteUseCase.deleteSelectedItem(selectedItemIndex);
+        deleteSubscribtion = deleteObservable.observeOn(AndroidSchedulers.mainThread()).
+                subscribeOn(Schedulers.io()).subscribe(new Observer<Integer>() {
+            @Override
+            public void onCompleted() {
+
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                view.showClearError();
+            }
+
+            @Override
+            public void onNext(Integer itemIndex) {
+                view.deleteItemDone(itemIndex);
+            }
+        });
     }
 }

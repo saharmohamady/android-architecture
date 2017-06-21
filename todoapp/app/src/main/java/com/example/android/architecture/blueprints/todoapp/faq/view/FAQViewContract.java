@@ -20,4 +20,10 @@ public interface FAQViewContract extends BaseView<FAQPresenter> {
     boolean isActive();
 
     void showNoFAQ(List<FAQModel> faqModels);
+
+    void showClearError();
+
+    void clearAllDataDone();
+
+    void deleteItemDone(Integer itemIndex);
 }

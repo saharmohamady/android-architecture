@@ -5,6 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -46,11 +49,12 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
         faqListLayout = (LinearLayout) view.findViewById(R.id.faqLListLayout);
         noFaqView = view.findViewById(R.id.noFaq);
 
-        faqPresenter = new FAQPresenter(this, Injection.provideGetFAQ(getActivity()));
+        faqPresenter = new FAQPresenter(this, Injection.provideGetFAQ(getActivity()), Injection.provideDeleteFAQ());
 
         swipeRefreshLayout =
                 (SwipeRefreshLayout) view.findViewById(R.id.refresh_layout);
         swipeRefreshLayout.setOnRefreshListener(this);
+        setHasOptionsMenu(true);
 
         return view;
     }
@@ -116,4 +120,37 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
         setProgressIndicator(false);
     }
 
+    @Override
+    public void showClearError() {
+        Toast.makeText(getActivity(), R.string.errorOccer, Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    public void clearAllDataDone() {
+        showNoFAQ(new ArrayList<FAQModel>());
+    }
+
+    @Override
+    public void deleteItemDone(Integer itemIndex) {
+        faqDataAdapter.deleteSelectedItem();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.menu_clear:
+                faqPresenter.clearFAQs();
+                break;
+            case R.id.menu_delete:
+                faqPresenter.deleteSelected(faqDataAdapter.getSelectedItemIndex());
+                break;
+        }
+        return true;
+    }
+
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+        inflater.inflate(R.menu.faq_fragment_menu, menu);
+    }
 }

@@ -55,5 +55,8 @@
     <string name="no_faq_all">You have no FAQs!</string>
     <string name="faq_item_clicked">FAQ item clicked</string>
     <string name="error_loading_faq" >Error loading FAQ.</string>
+    <string name="menu_clear_all">Clear</string>
+    <string name="Delete">Delete Selected</string>
+    <string name="errorOccer">Error Occer while deleting</string>
 
 </resources>
