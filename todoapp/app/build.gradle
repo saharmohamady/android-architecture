@@ -1,5 +1,5 @@
 apply plugin: 'com.android.application'
-
+apply plugin: 'org.sonarqube'
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
@@ -60,6 +60,17 @@ android {
         }
     }
     buildToolsVersion '25.0.0'
+    sonarqube {
+        properties {
+            property 'sonar.host.url', 'http://tsse-sonar.bitnamiapp.com/'
+            property 'sonar.login', todoCleanSonarqubeUsername
+            property 'sonar.password', todoCleanSonarqubePassword
+            property 'sonar.projectKey', "sahar-poc:faq"
+            property 'sonar.sources', 'src/main'
+            property 'sonar.tests', 'src/test'
+            property 'sonar.sourceEncoding', 'UTF-8'
+        }
+    }
 }
 
 /*
