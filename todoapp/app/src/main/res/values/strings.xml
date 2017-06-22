@@ -39,11 +39,6 @@
     <string name="no_data">No data</string>
     <string name="loading">LOADING</string>
 
-    <string-array name="list_tasks_array">
-        <item>@string/nav_all</item>
-        <item>@string/nav_active</item>
-        <item>@string/nav_completed</item>
-    </string-array>
     <string name="nav_all">All</string>
     <string name="nav_active">Active</string>
     <string name="nav_completed">Completed</string>
@@ -55,5 +50,13 @@
     <string name="no_tasks_completed">You have no completed TO-DOs!</string>
     <string name="no_tasks_add">Add a TO-DO item +</string>
     <string name="refresh">Refresh</string>
+    <string name="faq_title">FAQ</string>
+    <string name="faq_title_label">Frequantly Asked Questions</string>
+    <string name="no_faq_all">You have no FAQs!</string>
+    <string name="faq_item_clicked">FAQ item clicked</string>
+    <string name="error_loading_faq" >Error loading FAQ.</string>
+    <string name="menu_clear_all">Clear</string>
+    <string name="Delete">Delete Selected</string>
+    <string name="errorOccer">Error Occer while deleting</string>
 
 </resources>
