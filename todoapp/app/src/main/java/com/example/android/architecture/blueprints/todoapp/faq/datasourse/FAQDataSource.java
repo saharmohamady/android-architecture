@@ -12,4 +12,6 @@ import rx.Observable;
 
 public interface FAQDataSource {
     Observable<List<FAQModel>> getListOfFAQs();
+
+    void destroy();
 }

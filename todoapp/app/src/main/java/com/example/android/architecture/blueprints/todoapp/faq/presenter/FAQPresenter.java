@@ -1,6 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp.faq.presenter;
 
-import com.example.android.architecture.blueprints.todoapp.BasePresenter;
+import android.support.annotation.NonNull;
+
 import com.example.android.architecture.blueprints.todoapp.faq.domain.usecase.DeleteFaqsUseCase;
 import com.example.android.architecture.blueprints.todoapp.faq.domain.usecase.FaqUseCase;
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
@@ -20,15 +21,15 @@ import rx.schedulers.Schedulers;
  * Created by Sahar Almohamady on 6/14/2017.
  */
 
-public class FAQPresenter implements BasePresenter {
-    private final FAQViewContract view;
-    private final FaqUseCase faqUseCase;
-    private final DeleteFaqsUseCase deleteUseCase;
+public class FAQPresenter implements FAQPresenterContract {
+    private FAQViewContract view;
+    private FaqUseCase faqUseCase;
+    private DeleteFaqsUseCase deleteUseCase;
     private Subscription clearSubscribtion;
     private Subscription loadSubscribtion;
     private Subscription deleteSubscribtion;
 
-    public FAQPresenter(FAQViewContract view, FaqUseCase faqUseCase, DeleteFaqsUseCase deleteUseCase) {
+    public FAQPresenter(@NonNull FAQViewContract view, @NonNull FaqUseCase faqUseCase, @NonNull DeleteFaqsUseCase deleteUseCase) {
         this.view = view;
         this.faqUseCase = faqUseCase;
         this.deleteUseCase = deleteUseCase;
@@ -108,5 +109,21 @@ public class FAQPresenter implements BasePresenter {
                 view.deleteItemDone(itemIndex);
             }
         });
+    }
+
+    @Override
+    public void stop() {
+        if (clearSubscribtion != null && !clearSubscribtion.isUnsubscribed())
+            clearSubscribtion.unsubscribe();
+        if (deleteSubscribtion != null && !deleteSubscribtion.isUnsubscribed())
+            deleteSubscribtion.unsubscribe();
+        if (loadSubscribtion != null && !loadSubscribtion.isUnsubscribed())
+            loadSubscribtion.unsubscribe();
+
+        view = null;
+        faqUseCase.destroy();
+        faqUseCase = null;
+        deleteUseCase = null;
+        deleteUseCase = null;
     }
 }

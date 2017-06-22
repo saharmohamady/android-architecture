@@ -1,5 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp.faq.domain.usecase;
 
+import android.support.annotation.NonNull;
+
 import com.example.android.architecture.blueprints.todoapp.faq.datasourse.FAQRepository;
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
 
@@ -12,10 +14,10 @@ import rx.Observable;
  * Created by Sahar Almohamady on 6/14/2017.
  */
 
-public class FaqUseCase {
+public class FaqUseCase implements UseCaseContract{
     private final FAQRepository faqRepository;
 
-    public FaqUseCase(FAQRepository faqRepository) {
+    public FaqUseCase(@NonNull FAQRepository faqRepository) {
         this.faqRepository = faqRepository;
     }
 
@@ -24,4 +26,8 @@ public class FaqUseCase {
         return models;
     }
 
+    @Override
+    public void destroy() {
+        faqRepository.destroy();
+    }
 }

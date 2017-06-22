@@ -26,4 +26,9 @@ public class FAQFakeRepository implements FAQDataSource {
         models.add(new FAQModel("question1", "answer for question1"));
         return Observable.from(models).toList();
     }
+
+    @Override
+    public void destroy() {
+
+    }
 }

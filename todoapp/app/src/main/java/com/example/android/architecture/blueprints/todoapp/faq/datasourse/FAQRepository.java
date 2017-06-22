@@ -1,5 +1,7 @@
 package com.example.android.architecture.blueprints.todoapp.faq.datasourse;
 
+import android.support.annotation.NonNull;
+
 import com.example.android.architecture.blueprints.todoapp.faq.datasourse.fake.FAQFakeRepository;
 import com.example.android.architecture.blueprints.todoapp.faq.datasourse.remote.FAQRemoteRepository;
 import com.example.android.architecture.blueprints.todoapp.faq.model.FAQModel;
@@ -12,12 +14,12 @@ import rx.Observable;
  * Created by Sahar Almohamady on 6/14/2017.
  */
 
-public class FAQRepository {
+public class FAQRepository implements FAQDataSource {
     private static FAQRepository INSTANCE = null;
-    private final FAQFakeRepository faqFakeRepository;
+    private FAQFakeRepository faqFakeRepository;
     private FAQRemoteRepository faqRemoteRepository;
 
-    public FAQRepository(FAQRemoteRepository faqRemoteRepository, FAQFakeRepository faqFakeRepository) {
+    public FAQRepository(@NonNull FAQRemoteRepository faqRemoteRepository, @NonNull FAQFakeRepository faqFakeRepository) {
         this.faqRemoteRepository = faqRemoteRepository;
         this.faqFakeRepository = faqFakeRepository;
     }
@@ -31,5 +33,14 @@ public class FAQRepository {
 
     public Observable<List<FAQModel>> getListOfFAQs() {
         return faqRemoteRepository.getListOfFAQs();
+    }
+
+    @Override
+    public void destroy() {
+        INSTANCE = null;
+        faqFakeRepository.destroy();
+        faqRemoteRepository.destroy();
+        faqFakeRepository = null;
+        faqRemoteRepository = null;
     }
 }

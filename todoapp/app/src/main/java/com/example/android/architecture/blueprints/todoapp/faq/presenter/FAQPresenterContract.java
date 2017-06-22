@@ -7,4 +7,5 @@ import com.example.android.architecture.blueprints.todoapp.BasePresenter;
  */
 
 public interface FAQPresenterContract extends BasePresenter {
+    void stop();
 }

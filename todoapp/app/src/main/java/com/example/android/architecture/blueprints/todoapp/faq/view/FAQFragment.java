@@ -153,4 +153,14 @@ public class FAQFragment extends Fragment implements FAQViewContract, FAQListIte
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         inflater.inflate(R.menu.faq_fragment_menu, menu);
     }
+
+    @Override
+    public void onDestroy() {
+        faqPresenter.stop();
+        faqDataAdapter = null;
+        faqListLayout = null;
+        noFaqView = null;
+        swipeRefreshLayout = null;
+        super.onDestroy();
+    }
 }

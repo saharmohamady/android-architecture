@@ -7,6 +7,7 @@ import com.example.android.architecture.blueprints.todoapp.network.NetworkManage
 
 import java.util.List;
 
+import retrofit2.Retrofit;
 import rx.Observable;
 
 /**
@@ -14,6 +15,8 @@ import rx.Observable;
  */
 
 public class FAQRemoteRepository implements FAQDataSource {
+    private Retrofit networkInst;
+
     public FAQRemoteRepository() {
 
     }
@@ -23,7 +26,13 @@ public class FAQRemoteRepository implements FAQDataSource {
         return getFaqs();
     }
 
+    @Override
+    public void destroy() {
+        networkInst = null;
+    }
+
     private Observable<List<FAQModel>> getFaqs() {
-        return NetworkManager.getInstance().create(GetFaqsApi.class).listFAQs();
+        networkInst = NetworkManager.getInstance();
+        return networkInst.create(GetFaqsApi.class).listFAQs();
     }
 }
